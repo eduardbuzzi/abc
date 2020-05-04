@@ -16,7 +16,7 @@ IP=$(cat $WORDLIST | head -n$i | tail -n1)
 NMAP=$(nmap --open -sS -Pn -p $PORTA $IP | cut -d ' ' -f2 | head -n2 | tail -n1)
 if [ "$NMAP" = 'scan' ]
 then
-echo "$IP => Tem a PORTA 80 ABERTA!"
+echo "$IP => Tem a PORTA $PORTA ABERTA!"
 fi
 done
 echo
