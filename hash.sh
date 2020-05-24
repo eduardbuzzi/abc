@@ -3,18 +3,26 @@ principal() {
 echo
 echo "[1] Codificar MD5"
 echo "[2] Codificar SHA1"
-echo "[3] Decodificar MD5"
-echo "[4] Decodificar SHA1"
-echo "[5] Sair"
+echo "[3] Codificar SHA256"
+echo "[4] Codificar SHA512"
+echo "[5] Decodificar MD5"
+echo "[6] Decodificar SHA1"
+echo "[7] Decodificar SHA256"
+echo "[8] Decodificar SHA512"
+echo "[9] Sair"
 echo
 read -p "Sua Escolha => " ESCOLHA
 echo
 case $ESCOLHA in
 1) md5choice;;
 2) sha1choice;;
-3) md5decodificar;;
-4) sha1decodificar;;
-5) exit;;
+3) sha256choice;;
+4) sha512choice;;
+5) md5decodificar;;
+6) sha1decodificar;;
+7) sha256decodificar;;
+8) sha512decodificar;;
+9) exit;;
 *) principal;;
 esac
 }
@@ -23,7 +31,7 @@ codificar(){
 read -p "Mensagem que deseja criar Hash em $HASH => " MENSAGEM
 echo
 HASHGERADA=$(echo -n "$MENSAGEM" | $hash"sum" | cut -d ' ' -f1)
-echo "Hash gerada em $HASH para a mensagem '$MENSAGEM' => '$HASHGERADA'"
+echo "Hash gerada em $HASH para a mensagem '$MENSAGEM' => $HASHGERADA"
 principal
 }
 
@@ -39,6 +47,19 @@ hash="sha1"
 codificar
 }
 
+sha256choice(){
+HASH="SHA256"
+hash="sha256"
+codificar
+}
+
+sha512choice(){
+HASH="SHA512"
+hash="sha512"
+codificar
+}
+
+
 md5decodificar(){
 HASH="MD5"
 hash="md5"
@@ -50,6 +71,20 @@ sha1decodificar(){
 HASH="SHA1"
 hash="sha1"
 CARACTERES=40
+decodificar
+}
+
+sha256decodificar(){
+HASH="SHA256"
+hash="sha256"
+CARACTERES=64
+decodificar
+}
+
+sha512decodificar(){
+HASH="SHA512"
+hash="sha512"
+CARACTERES=128
 decodificar
 }
 
